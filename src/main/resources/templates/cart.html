@@ -1,0 +1,19 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Cart</title></head>
+<body>
+  <a href="/products">Continue shopping</a>
+  <h1>Your cart</h1>
+  <div th:if="${#lists.isEmpty(cart)}">Cart empty</div>
+  <div th:each="p,iterStat : ${cart}">
+    <div>
+      <span th:text="${p.name}">name</span> -
+      <span th:text="${p.price}">0</span>
+      <form th:action="@{/cart/remove/{index}(index=${iterStat.index})}" method="post" style="display:inline">
+        <button type="submit">Remove</button>
+      </form>
+    </div>
+  </div>
+  <h3>Total: ₹<span th:text="${total}">0</span></h3>
+</body>
+</html>

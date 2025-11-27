@@ -1,0 +1,27 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title th:text="${product.name}">Product</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+  <a href="/products" class="btn btn-link mb-3">← Back to products</a>
+
+  <div class="row">
+    <div class="col-md-6">
+      <img th:src="${product.imageUrl != null ? product.imageUrl : '/images/placeholder.png'}"
+           class="img-fluid" alt="product image"/>
+    </div>
+    <div class="col-md-6">
+      <h1 th:text="${product.name}">Name</h1>
+      <p th:text="${product.description}">Description</p>
+      <p class="h4">₹ <span th:text="${product.price}">0</span></p>
+
+      <form th:action="@{/cart/add/{id}(id=${product.productId})}" method="post">
+        <button class="btn btn-success">Add to cart</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
